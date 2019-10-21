@@ -1,4 +1,5 @@
 plugins {
+    id "org.openapi.generator" version "4.1.1"
     id 'org.springframework.boot' version '2.2.0.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
@@ -38,4 +39,18 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+openApiGenerate {
+    generatorName = "kotlin"
+    inputSpec = "https://raw.githubusercontent.com/CandleFires/API/master/spec.yaml"
+    outputDir = "$buildDir/generated".toString()
+    apiPackage = "com.candlefires.mindmap.api"
+    modelPackage = "com.candlefires.mindmap.model"
+    modelFilesConstrainedTo = [
+            "Error"
+    ]
+    configOptions = [
+            dateLibrary: "java8"
+    ]
 }
